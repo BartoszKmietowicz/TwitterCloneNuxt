@@ -1,7 +1,7 @@
 <template>
   <div :class="{ dark: darkMode }">
     <div class="bg-white dark:bg-dim-900 py-6">
-      <div class="min-h-full">
+      <div v-if="user" class="min-h-full">
         <div
           class="grid grid-cols-12 mx-auto sm:px-6 lg:max-w-7xl lg:px-4 lg:gap-5"
         >
@@ -22,9 +22,17 @@
           </div>
         </div>
       </div>
+
+      <AuthPage v-else/>
     </div>
   </div>
 </template>
 <script setup>
 const darkMode = useState('darkMode', () => true);
+const {useAuthUser,initializeAuthentication}=useAuth();
+const user = useAuthUser()
+
+onBeforeMount(()=>{
+  initializeAuthentication();
+})
 </script>
