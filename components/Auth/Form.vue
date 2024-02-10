@@ -13,6 +13,7 @@
 	</div>
 </template>
 <script  setup>
+
 	const data = reactive({
     username: '',
 		password:'',

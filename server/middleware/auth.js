@@ -7,13 +7,12 @@ export default defineEventHandler(async (event) => {
 
   const isHandled = endpoints.some((endpoint) => {
     const pattern = new UrlPattern(endpoint);
-
     return pattern.match(event.req.url);
   });
   if (!isHandled) {
     return;
   }
-  const token = event.req.headers['authorization']?.split(' ')[1];
+  const token = event.node.req.headers['authorization']?.split(' ')[1];
 
   const decoded = decodeAccessToken(token);
   if (!decoded) {
